@@ -7,9 +7,12 @@ servers:
   - url: https://api.spacexdata.com/v4
 security:
   - apiKey: []
+
 paths:
   /rockets:
     post:
+      description: Create a new rocket using the data in the request body
+      operationId: createRocket
       summary: Create a new rocket
       requestBody:
         required: true
@@ -24,8 +27,37 @@ paths:
           description: Bad request
       security:
         - apiKey: []
+    patch: 
+      description: Update an existing rocket using the data in the request body
+      operationId: updateRocket
+      summary: Update an existing rocket
+      parameters:
+        - name: id
+          in: path
+          description: ID of the rocket
+          schema:
+            type: string
+            pattern: "^[0-9a-fA-F]{24}$"
+          example: "5e9d0d95eda69955f709d1ea"
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RocketWithoutId"
+      responses:
+        "200":
+          description: Updated
+        "400":
+          description: Bad request
+        
+      security:
+        - apiKey: []
     get:
       summary: Get all rockets
+      operationId: getRockets
+      description: Returns a list of all rockets
       responses:
         "200":
           description: A list of all rockets
@@ -38,8 +70,10 @@ paths:
   /rockets/{rocketId}:
     get:
       summary: Get a rocket
+      operationId: getRocket
+      description: Returns a single rocket
       parameters:
-        - name: rocketId
+        - name: id
           in: path
           required: true
           schema:
