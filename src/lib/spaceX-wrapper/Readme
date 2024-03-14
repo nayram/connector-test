@@ -1,0 +1,19 @@
+# SpaceX API wrapper
+
+## Overview
+
+This is a wrapper to connect and make requests to the spacex api. It makes use of the [GOT](https://www.npmjs.com/package/got) client library to make the http requests.
+
+## Implementation
+
+`getRocketById`: This function accepts a rocket Id and returns a json object containing details of the rocket. Below is a sample of the response to expect
+
+```ts
+import { getRocketById } from "./spaceX-wrapper";
+
+const rocketId = "5e9d0d95eda69955f709d1eb";
+
+getRocketById(rocketId)
+  .then((rocket) => console.log(rocket))
+  .catch((error) => console.log(error));
+```

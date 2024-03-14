@@ -20,7 +20,76 @@ paths:
   /space/rockets/{rocketId}:
     get:
       operationId: rocketsOne
+      parameters:
+        - name: rocketId
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "5e9d0d95eda69955f709d1ea"
+          description: "ID of the rocket"
+      summary: "Get a rocket"
       responses:
         "200":
           description: "Get a rocket"
-          content: {}
+          content: {
+            "application/json": {
+              schema: {
+                $ref: "#/components/schemas/Rocket"
+              }
+            }
+          }
+        "400":
+          description: "Invalid Rocket Id"
+          content: {
+            "application/json": {
+              schema: {
+                type: "object",
+                properties: {
+                  message: {
+                    type: "string" 
+                  }
+                },
+                example: {
+                  message: "Invalid Rocket Id"
+                }
+              }
+            }
+          }
+        "404":
+          description: "Rocket not found"
+          content: {
+            "application/json": {
+              schema: {
+                type: "object",
+                properties: {
+                  message: {
+                    type: "string"
+                  }
+                },
+                example: {
+                  message: "Rocket not found"
+                }
+              }
+            }
+          }
+components:
+  schemas:
+    Rocket:
+      type: object
+      properties:
+        id:
+          type: string
+        company:
+          type: string
+        country:
+          type: string
+        main_image:
+          type: string
+        cost_per_launch:
+          type: object
+          properties:
+            amount:
+              type: number
+            currency:
+              type: string

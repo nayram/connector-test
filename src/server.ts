@@ -55,7 +55,7 @@ void (async () => {
       console.log(
         chalk`{dim ${new Date()
           .toTimeString()
-          .substring(0, 8)}} {magenta http} {red ERROR} ${err}`
+          .substring(0, 8)}} {magenta http} {red ERROR} ${err}`, err
       );
       res.status(500).send({ message: "something went wrong" });
     }

@@ -1,0 +1,428 @@
+openapi: 3.0.0
+info:
+  title: SpaceX API
+  description: API for accessing SpaceX data
+  version: 1.0.0
+servers:
+  - url: https://api.spacexdata.com/v4
+security:
+  - apiKey: []
+paths:
+  /rockets:
+    get:
+      summary: Get all rockets
+      responses:
+        "200":
+          description: A list of all rockets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Rocket"
+    post:
+      summary: Create a new rocket
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RocketWithoutId"
+      responses:
+        "201":
+          description: Created
+        "400":
+          description: Bad request
+      security:
+        - apiKey: []
+  /rockets/{rocketId}:
+    get:
+      summary: Get a rocket
+      parameters:
+        - name: rocketId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^[0-9a-fA-F]{24}$"
+      responses:
+        "200":
+          description: A single rocket
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/Rocket"
+        "404":
+          description: Rocket not found
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Rocket not found
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: spacex-key
+  schemas:
+    Rocket:
+      type: object
+      properties:
+        height:
+          type: object
+          properties:
+            meters:
+              type: number
+            feet:
+              type: number
+        diameter:
+          type: object
+          properties:
+            meters:
+              type: number
+            feet:
+              type: number
+        mass:
+          type: object
+          properties:
+            kg:
+              type: number
+            lb:
+              type: number
+        first_stage:
+          type: object
+          properties:
+            thrust_sea_level:
+              type: object
+              properties:
+                kN:
+                  type: number
+                lbf:
+                  type: number
+            thrust_vacuum:
+              type: object
+              properties:
+                kN:
+                  type: number
+                lbf:
+                  type: number
+            reusable:
+              type: boolean
+            engines:
+              type: integer
+            fuel_amount_tons:
+              type: number
+            burn_time_sec:
+              type: integer
+        second_stage:
+          type: object
+          properties:
+            thrust:
+              type: object
+              properties:
+                kN:
+                  type: number
+                lbf:
+                  type: number
+            payloads:
+              type: object
+              properties:
+                composite_fairing:
+                  type: object
+                  properties:
+                    height:
+                      type: object
+                      properties:
+                        meters:
+                          type: number
+                        feet:
+                          type: number
+                    diameter:
+                      type: object
+                      properties:
+                        meters:
+                          type: number
+                        feet:
+                          type: number
+                option_1:
+                  type: string
+            reusable:
+              type: boolean
+            engines:
+              type: integer
+            fuel_amount_tons:
+              type: number
+            burn_time_sec:
+              type: integer
+        engines:
+          type: object
+          properties:
+            isp:
+              type: object
+              properties:
+                sea_level:
+                  type: number
+                vacuum:
+                  type: number
+            thrust_sea_level:
+              type: object
+              properties:
+                kN:
+                  type: number
+                lbf:
+                  type: number
+            thrust_vacuum:
+              type: object
+              properties:
+                kN:
+                  type: number
+                lbf:
+                  type: number
+            number:
+              type: integer
+            type:
+              type: string
+            version:
+              type: string
+            layout:
+              type: string
+            engine_loss_max:
+              type: number
+            propellant_1:
+              type: string
+            propellant_2:
+              type: string
+            thrust_to_weight:
+              type: number
+        landing_legs:
+          type: object
+          properties:
+            number:
+              type: integer
+            material:
+              type: string
+        payload_weights:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              kg:
+                type: number
+              lb:
+                type: number
+        flickr_images:
+          type: array
+          items:
+            type: string
+        name:
+          type: string
+        type:
+          type: string
+        active:
+          type: boolean
+        stages:
+          type: integer
+        boosters:
+          type: integer
+        cost_per_launch:
+          type: number
+        success_rate_pct:
+          type: integer
+        first_flight:
+          type: string
+          format: date
+        country:
+          type: string
+        company:
+          type: string
+        wikipedia:
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+          pattern: "^[0-9a-fA-F]{24}$"
+    RocketWithoutId:
+      type: object
+      properties:
+        height:
+          type: object
+          properties:
+            meters:
+              type: number
+            feet:
+              type: number
+        diameter:
+          type: object
+          properties:
+            meters:
+              type: number
+            feet:
+              type: number
+        mass:
+          type: object
+          properties:
+            kg:
+              type: number
+            lb:
+              type: number
+        first_stage:
+          type: object
+          properties:
+            thrust_sea_level:
+              type: object
+              properties:
+                kN:
+                  type: number
+                lbf:
+                  type: number
+            thrust_vacuum:
+              type: object
+              properties:
+                kN:
+                  type: number
+                lbf:
+                  type: number
+            reusable:
+              type: boolean
+            engines:
+              type: integer
+            fuel_amount_tons:
+              type: number
+            burn_time_sec:
+              type: integer
+        second_stage:
+          type: object
+          properties:
+            thrust:
+              type: object
+              properties:
+                kN:
+                  type: number
+                lbf:
+                  type: number
+            payloads:
+              type: object
+              properties:
+                composite_fairing:
+                  type: object
+                  properties:
+                    height:
+                      type: object
+                      properties:
+                        meters:
+                          type: number
+                        feet:
+                          type: number
+                    diameter:
+                      type: object
+                      properties:
+                        meters:
+                          type: number
+                        feet:
+                          type: number
+                option_1:
+                  type: string
+            reusable:
+              type: boolean
+            engines:
+              type: integer
+            fuel_amount_tons:
+              type: number
+            burn_time_sec:
+              type: integer
+        engines:
+          type: object
+          properties:
+            isp:
+              type: object
+              properties:
+                sea_level:
+                  type: number
+                vacuum:
+                  type: number
+            thrust_sea_level:
+              type: object
+              properties:
+                kN:
+                  type: number
+                lbf:
+                  type: number
+            thrust_vacuum:
+              type: object
+              properties:
+                kN:
+                  type: number
+                lbf:
+                  type: number
+            number:
+              type: integer
+            type:
+              type: string
+            version:
+              type: string
+            layout:
+              type: string
+            engine_loss_max:
+              type: number
+            propellant_1:
+              type: string
+            propellant_2:
+              type: string
+            thrust_to_weight:
+              type: number
+        landing_legs:
+          type: object
+          properties:
+            number:
+              type: integer
+            material:
+              type: string
+        payload_weights:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              kg:
+                type: number
+              lb:
+                type: number
+        flickr_images:
+          type: array
+          items:
+            type: string
+        name:
+          type: string
+        type:
+          type: string
+        active:
+          type: boolean
+        stages:
+          type: integer
+        boosters:
+          type: integer
+        cost_per_launch:
+          type: number
+        success_rate_pct:
+          type: integer
+        first_flight:
+          type: string
+          format: date
+        country:
+          type: string
+        company:
+          type: string
+        wikipedia:
+          type: string
+        description:
+          type: string
