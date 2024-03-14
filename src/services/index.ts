@@ -1,1 +1,1 @@
-export * from './spaceX'
+export * from "./spaceX";

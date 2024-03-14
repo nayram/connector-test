@@ -1,2 +1,2 @@
-export * from './spacex-fixtures'
-export * from './spacex-mocks'
+export * from "./spacex-fixtures";
+export * from "./spacex-mocks";

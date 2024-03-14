@@ -22,7 +22,7 @@ void (async () => {
     console.log(
       chalk`{dim ${new Date()
         .toTimeString()
-        .substring(0, 8)}} {magenta http} {green ${req.method}} ${req.path}`
+        .substring(0, 8)}} {magenta http} {green ${req.method}} ${req.path}`,
     );
 
     // Set headers
@@ -55,7 +55,8 @@ void (async () => {
       console.log(
         chalk`{dim ${new Date()
           .toTimeString()
-          .substring(0, 8)}} {magenta http} {red ERROR} ${err}`, err
+          .substring(0, 8)}} {magenta http} {red ERROR} ${err}`,
+        err,
       );
       res.status(500).send({ message: "something went wrong" });
     }
@@ -67,8 +68,8 @@ void (async () => {
         .toTimeString()
         .substring(
           0,
-          8
-        )}} {magenta Unify} {green READY} http://localhost:${PORT}/hello`
+          8,
+        )}} {magenta Unify} {green READY} http://localhost:${PORT}/hello`,
     );
   });
 })();

@@ -11,7 +11,7 @@ export const getOpenApiSpec = async (specPath: string) => {
     console.log(
       chalk`{dim ${new Date()
         .toTimeString()
-        .substring(0, 8)}} {magenta http} {red ERROR} Missing spec.`
+        .substring(0, 8)}} {magenta http} {red ERROR} Missing spec.`,
     );
     return;
   }
@@ -26,7 +26,7 @@ export const getOpenApiRouter = async (specPath: string) => {
     console.log(
       chalk`{dim ${new Date()
         .toTimeString()
-        .substring(0, 8)}} {magenta http} {red ERROR} Missing spec.`
+        .substring(0, 8)}} {magenta http} {red ERROR} Missing spec.`,
     );
     return;
   }

@@ -32,47 +32,39 @@ paths:
       responses:
         "200":
           description: "Get a rocket"
-          content: {
-            "application/json": {
-              schema: {
-                $ref: "#/components/schemas/Rocket"
-              }
+          content:
+            {
+              "application/json":
+                { schema: { $ref: "#/components/schemas/Rocket" } },
             }
-          }
         "400":
           description: "Invalid Rocket Id"
-          content: {
-            "application/json": {
-              schema: {
-                type: "object",
-                properties: {
-                  message: {
-                    type: "string" 
-                  }
+          content:
+            {
+              "application/json":
+                {
+                  schema:
+                    {
+                      type: "object",
+                      properties: { message: { type: "string" } },
+                      example: { message: "Invalid Rocket Id" },
+                    },
                 },
-                example: {
-                  message: "Invalid Rocket Id"
-                }
-              }
             }
-          }
         "404":
           description: "Rocket not found"
-          content: {
-            "application/json": {
-              schema: {
-                type: "object",
-                properties: {
-                  message: {
-                    type: "string"
-                  }
+          content:
+            {
+              "application/json":
+                {
+                  schema:
+                    {
+                      type: "object",
+                      properties: { message: { type: "string" } },
+                      example: { message: "Rocket not found" },
+                    },
                 },
-                example: {
-                  message: "Rocket not found"
-                }
-              }
             }
-          }
 components:
   schemas:
     Rocket:

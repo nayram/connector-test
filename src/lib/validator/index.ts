@@ -1,1 +1,1 @@
-export * from './is-valid-rocket-id'
+export * from "./is-valid-rocket-id";

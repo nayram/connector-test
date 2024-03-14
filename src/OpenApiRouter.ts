@@ -24,7 +24,7 @@ export class OpenApiRouter {
     // @ts-ignore
     this.paths = Object.entries(spec.paths).map(([path, value]) => {
       const pathRegex = new RegExp(
-        `^${path.replace(/{(.+?)}/g, "(?<$1>.+)")}$`
+        `^${path.replace(/{(.+?)}/g, "(?<$1>.+)")}$`,
       );
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
@@ -40,9 +40,9 @@ export class OpenApiRouter {
               "put",
               "delete",
               "trace",
-            ].includes(key)
+            ].includes(key),
           )
-          .map(([key, op]) => [key.toUpperCase(), op])
+          .map(([key, op]) => [key.toUpperCase(), op]),
       );
 
       return { path, pathRegex, operations };
@@ -53,7 +53,7 @@ export class OpenApiRouter {
     for (const pathDef of orderBy(
       this.paths,
       (def) => def.path.length,
-      "desc"
+      "desc",
     )) {
       const match = path.match(pathDef.pathRegex);
 
@@ -80,7 +80,7 @@ export class OpenApiRouter {
   matchByOperationId(operationId: string): Route | null {
     let results = this.paths.map((p) => {
       const op = Object.entries(p.operations).find(
-        ([_, value]) => value.operationId === operationId
+        ([_, value]) => value.operationId === operationId,
       ) as OpenAPIV3.OperationObject | undefined;
 
       return op

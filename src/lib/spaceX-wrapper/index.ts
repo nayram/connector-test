@@ -100,9 +100,7 @@ export type RocketResponse = {
   id: string;
 };
 
-export const getRocketById = async (
-  id: string
-): Promise<RocketResponse> => {
+export const getRocketById = async (id: string): Promise<RocketResponse> => {
   const { data } = await axios.get(`${baseUrl}/rockets/${id}`);
   return data as RocketResponse;
 };
