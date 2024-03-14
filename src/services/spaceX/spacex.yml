@@ -9,17 +9,6 @@ security:
   - apiKey: []
 paths:
   /rockets:
-    get:
-      summary: Get all rockets
-      responses:
-        "200":
-          description: A list of all rockets
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Rocket"
     post:
       summary: Create a new rocket
       requestBody:
@@ -35,6 +24,17 @@ paths:
           description: Bad request
       security:
         - apiKey: []
+    get:
+      summary: Get all rockets
+      responses:
+        "200":
+          description: A list of all rockets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Rocket"
   /rockets/{rocketId}:
     get:
       summary: Get a rocket
